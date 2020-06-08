@@ -183,19 +183,22 @@
 
 <script>
   var fireballSize = 22;
+  var FIREBALL_SPEED_WIND = 5;
+  var FIREBALL_SPEED_AGAINST = 2;
+  var WIZARD_RATIO = 1.337;
 
   function getFireballSpeed (isHeadWind) {
    if (!isHeadWind) {
-     return 5;
+     return FIREBALL_SPEED_WIND;
    }
 
-   return 2;
+   return FIREBALL_SPEED_AGAINST;
   }
 
   var wizardWidth = 70;
 
   function getWizardHeight () {
-    return 1.337 * wizardWidth;
+    return WIZARD_RATIO * wizardWidth;
   }
 
   var wizardSpeed = 3;
