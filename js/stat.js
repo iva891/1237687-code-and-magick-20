@@ -21,7 +21,7 @@ var TEXT_Y = 250;
 var TEXT_HEIGHT = 30;
 var MAX_HEIGHT = 150;
 
-var renderCloud = function (ctx, x, y, color) {
+var renderRect = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
@@ -46,36 +46,44 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+var getDivision = function (dividend, divisor) {
+  var quotient = dividend / divisor;
+  return quotient;
+};
+
 var randomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 window.renderStatistics = function (ctx, players, times) {
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, COLOR_GREY);
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, COLOR_WHITE);
+  renderRect(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, COLOR_GREY);
+  renderRect(ctx, CLOUD_X, CLOUD_Y, COLOR_WHITE);
 
   renderTitle(ctx, FONT, BASELINE, COLOR_BLACK, TITLE_X, TITLE_Y);
 
   ctx.fillStyle = COLOR_BLACK;
 
   var maxTime = getMaxElement(times);
-  var rateTime = MAX_HEIGHT / maxTime;
+  var rateTime = getDivision(MAX_HEIGHT, maxTime);
 
   var positionX = function (index) {
     return CLOUD_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * index;
   };
 
-  for (var i = 0; i < players.length; i++) {
-    ctx.fillText(players[i], positionX(i), TEXT_Y);
-    if (players[i] === 'Вы') {
+  var renderPlayersStat = function (index) {
+    ctx.fillText(players[index], positionX(index), TEXT_Y);
+    if (players[index] === 'Вы') {
       ctx.fillStyle = COLOR_RED;
     } else {
       var randomColor = randomNumber(0, 100);
       ctx.fillStyle = 'hsl(240, ' + randomColor + '%, 50%)';
     }
-    ctx.fillRect(positionX(i), CLOUD_HEIGHT - TEXT_HEIGHT - (rateTime * times[i]), BAR_WIDTH, rateTime * times[i]);
+    ctx.fillRect(positionX(index), CLOUD_HEIGHT - TEXT_HEIGHT - (rateTime * times[index]), BAR_WIDTH, rateTime * times[index]);
     ctx.fillStyle = COLOR_BLACK;
-    ctx.fillText(Math.round(times[i]), positionX(i), CLOUD_HEIGHT - (TEXT_HEIGHT * 1.5) - (rateTime * times[i]));
+    ctx.fillText(Math.round(times[index]), positionX(index), CLOUD_HEIGHT - (TEXT_HEIGHT * 1.5) - (rateTime * times[index]));
+  }
 
+  for (var i = 0; i < players.length; i++) {
+    renderPlayersStat(i);
   }
 };
