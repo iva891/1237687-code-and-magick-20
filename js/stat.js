@@ -81,7 +81,7 @@ window.renderStatistics = function (ctx, players, times) {
     ctx.fillRect(positionX(index), CLOUD_HEIGHT - TEXT_HEIGHT - (rateTime * times[index]), BAR_WIDTH, rateTime * times[index]);
     ctx.fillStyle = COLOR_BLACK;
     ctx.fillText(Math.round(times[index]), positionX(index), CLOUD_HEIGHT - (TEXT_HEIGHT * 1.5) - (rateTime * times[index]));
-  }
+  };
 
   for (var i = 0; i < players.length; i++) {
     renderPlayersStat(i);
