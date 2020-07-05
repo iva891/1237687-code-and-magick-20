@@ -66,8 +66,8 @@ window.renderStatistics = function (ctx, players, times) {
   var maxTime = getMaxElement(times);
   var rateTime = getDivision(MAX_HEIGHT, maxTime);
 
-  var positionX = function (index) {
-    return CLOUD_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * index;
+  var positionX = function (num) {
+    return CLOUD_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * num;
   };
 
   var renderPlayersStat = function (index) {
