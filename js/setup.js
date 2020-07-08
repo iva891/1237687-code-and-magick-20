@@ -1,5 +1,7 @@
 'use strict';
 
+var WIZARD_QUANTITY = 4;
+
 var NAMES = ['Иван',
   'Хуан Себастьян',
   'Мария',
@@ -41,15 +43,22 @@ var getRandomIndex = function (array) {
 
 var wizards = [];
 
-for (var i = 0; i < 4; i++) {
-  wizards.push({
-    name: '',
-    coatColor: '',
-    eyesColor: ''
-  });
-  wizards[i].name = NAMES[getRandomIndex(NAMES)] + ' ' + SURNAMES[getRandomIndex(SURNAMES)];
-  wizards[i].coatColor = COLORS[getRandomIndex(COLORS)];
-  wizards[i].eyesColor = COLORS_TEXT[getRandomIndex(COLORS_TEXT)];
+var createWizard = function (names, surnames, colors, colorsText) {
+  var name = names[getRandomIndex(names)] + ' ' + surnames[getRandomIndex(surnames)];
+  var coatColor = colors[getRandomIndex(colors)];
+  var eyesColor = colorsText[getRandomIndex(colorsText)];
+
+  var wizard = {
+    name: name,
+    coatColor: coatColor,
+    eyesColor: eyesColor,
+  };
+
+  wizards.push(wizard);
+};
+
+for (var i = 0; i < WIZARD_QUANTITY; i++) {
+  createWizard(NAMES, SURNAMES, COLORS, COLORS_TEXT);
 }
 
 var userDialog = document.querySelector('.setup');
@@ -73,9 +82,14 @@ var renderWizard = function (wizard) {
 };
 
 var fragment = document.createDocumentFragment();
-for (i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
-similarListElement.appendChild(fragment);
+
+var insertWizards = function (array) {
+  for (i = 0; i < array.length; i++) {
+    fragment.appendChild(renderWizard(array[i]));
+  }
+  similarListElement.appendChild(fragment);
+};
+
+insertWizards(wizards);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
