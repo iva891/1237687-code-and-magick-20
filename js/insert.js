@@ -2,7 +2,8 @@
 (function () {
   var WIZARD_QUANTITY = 4;
 
-  var NAMES = ['Иван',
+  var NAMES = [
+    'Иван',
     'Хуан Себастьян',
     'Мария',
     'Кристоф',
@@ -12,7 +13,8 @@
     'Вашингтон'
   ];
 
-  var SURNAMES = ['да Марья',
+  var SURNAMES = [
+    'да Марья',
     'Верон',
     'Мирабелла',
     'Вальц',
@@ -22,7 +24,8 @@
     'Ирвинг'
   ];
 
-  var COLORS = ['rgb(101, 137, 164)',
+  var COLORS = [
+    'rgb(101, 137, 164)',
     'rgb(241, 43, 107)',
     'rgb(146, 100, 161)',
     'rgb(56, 159, 117)',
@@ -30,7 +33,8 @@
     'rgb(0, 0, 0)'
   ];
 
-  var COLORS_TEXT = ['black',
+  var COLORS_TEXT = [
+    'black',
     'red',
     'blue',
     'yellow',
